@@ -24,7 +24,7 @@ export function fetchRecipes(
 ): Promise<PageResponseRecipeDto> {
   const thePage = typeof page === "string" ? parseInt(page) : page;
 
-  const theOrderBy = !!orderBy
+  const theOrderBy = !orderBy
     ? undefined
     : orderBy === "time" || orderBy === "likes"
       ? orderBy
