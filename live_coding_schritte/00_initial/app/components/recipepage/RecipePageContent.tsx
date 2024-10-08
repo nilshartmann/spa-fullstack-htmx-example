@@ -23,6 +23,12 @@ export default async function RecipePageContent({
             cookTime={recipe.cookTime}
             preparationTime={recipe.preparationTime}
           />
+          {/*
+
+          // todo: Austauschen gegen ConfigurableIngredientsSection
+          //  - oben: defaultServings aus "Datenbank" laden
+
+          */}
           <IngredientsSection
             ingredients={recipe.ingredients}
             defaultServings={defaultServings}
@@ -31,6 +37,13 @@ export default async function RecipePageContent({
         </div>
         <div className={"md:w-1/3"}>
           <Sidebar>
+            {/*
+            - todo:
+              - FeedbackListLoader einbauen
+              - Verzögern des Ladens in 'demo_config'
+              - In FeedbackListLoader Laden der Daten zeigen
+              - Suspense
+            */}
             <H2>Feedback</H2>
           </Sidebar>
         </div>

@@ -1,5 +1,6 @@
 import { Ingredient } from "@/app/components/api-types.ts";
 import IngredientList from "@/app/components/recipepage/IngredientsList.tsx";
+import { useState } from "react";
 
 type ConfigurableIngredientsSection = {
   ingredients: Ingredient[];
@@ -10,12 +11,18 @@ export default function ConfigurableIngredientsSection({
   defaultServings,
 }: ConfigurableIngredientsSection) {
   // todo:
-  //    const [servings, setServings] = useState(defaultServings);
-  const servings = defaultServings;
-  const setServings = (_: any) => {};
+  //   - "use client"
+  //   - servings auf dem Server speichern
+  //   - Netzwerkverkehr!
+  //   - In RecipePageContent 'defaultServings'
+  //      vom Server laden und als Property übergeben
+  //
+  const [servings, setServings] = useState(defaultServings);
 
   const handleServingsChange = (newServings: number) => {
     setServings(newServings);
+
+    // todo: "Speichern" auf dem Server
   };
   return (
     <>
