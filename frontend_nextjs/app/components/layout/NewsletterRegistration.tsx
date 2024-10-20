@@ -2,25 +2,28 @@
 
 import { Input } from "../Input.tsx";
 import { Button } from "../Button.tsx";
-import React, { useState } from "react";
+import React, { useState, useTransition } from "react";
+import { subscribeToNewsletter } from "@/app/components/recipify-actions.ts";
 
 export function NewsletterRegistration() {
   const [email, setEmail] = useState("");
+  const [status, setStatus] = useState<"Subscribed!" | null>(null);
 
-  // const inputDisabled = mutation.isPending;
-  // const saveDisabled = mutation.isPending || email.trim().length === 0;
+  const [isPending, startTransition] = useTransition();
 
   const handleEmailChange = (e: string) => {
-    // mutation.reset();
+    setStatus(null);
     setEmail(e);
   };
 
   const handleSubmit = () => {
-    // mutation.mutate(email);
+    startTransition(async () => {
+      await subscribeToNewsletter(email);
+      setStatus("Subscribed!");
+    });
   };
 
-  const saveDisabled = false;
-  const mutation: any = {};
+  const saveDisabled = email.length < 1 || isPending;
 
   return (
     <div
@@ -31,19 +34,16 @@ export function NewsletterRegistration() {
         <Input
           value={email}
           onChange={(e) => handleEmailChange(e.target.value)}
-          // disabled={inputDisabled}
+          disabled={isPending}
           placeholder={"E-Mail"}
         />
       </div>
       <div>
-        <Button disabled={saveDisabled} checked={mutation.isSuccess}>
-          {mutation.isSuccess ? (
-            "Subscribed!"
-          ) : (
-            <button onClick={handleSubmit}>Subscribe</button>
-          )}
+        <Button disabled={saveDisabled} checked={status === "Subscribed!"}>
+          <button onClick={handleSubmit}>Subscribe</button>
         </Button>
       </div>
+      <div>{status === "Subscribed!" && "Subscribed!"}</div>
     </div>
   );
 }
