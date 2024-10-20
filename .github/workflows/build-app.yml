@@ -30,7 +30,7 @@ jobs:
         with:
           distribution: "temurin" # See 'Supported distributions' for available options
           java-version: "21"
-      - run: ./gradlew bootJar -x test
+      - run: ./mvnw clean package -DskipTests
       - name: Get short SHA
         id: sha
         run: echo "::set-output name=short::$(echo ${GITHUB_SHA} | cut -c 1-7)"

@@ -1,4 +1,0 @@
-rootProject.name = 'nextjs-workshop'
-
-
-include 'backend'
