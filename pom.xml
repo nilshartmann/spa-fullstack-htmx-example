@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>nh.recipify</groupId>
-    <artifactId>alles-fullstack-root</artifactId>
+    <artifactId>fullstack-oder-htmx-root</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
     <modules>
