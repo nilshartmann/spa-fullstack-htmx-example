@@ -5,6 +5,8 @@ export const slowDown_IncreaseLikes = 2400;
 export const slowDown_GetFeedbacks = 600;
 export const showNextLogoInHeader = false;
 
+export const enableTanstackQueryDevTools = false;
+
 /**
  * Set to -1 to make searching for longer terms FASTER
  * than searching for shorter terms
