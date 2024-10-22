@@ -1,42 +1,38 @@
 "use client";
 import { RecipeDto } from "@/app/components/api-types.ts";
-import { useOptimistic, useState, useTransition } from "react";
-import { increaseLikes } from "@/app/components/material/recipe-actions.ts";
 import { twMerge } from "tailwind-merge";
+import { useActionState } from "react";
+import { likeRecipeAction } from "@/app/components/like-action.ts";
+import { LikeIndicator } from "@/app/components/LoadingIndicator.tsx";
 
 type LikesWidgetProps = {
   recipe: RecipeDto;
 };
 
 export function LikesWidget({ recipe }: LikesWidgetProps) {
-  const [isPending, startTransition] = useTransition();
-  const [likes, setLikes] = useState(recipe.likes);
-  const [optimisticLikes, increaseOptimistic] = useOptimistic(
-    likes,
-    (currentLikes, amount: number) => {
-      return currentLikes + amount;
-    },
-  );
-
-  const handleIncreaseLikes = async () => {
-    startTransition(async () => {
-      increaseOptimistic(1);
-      const result = await increaseLikes(recipe.id);
-      setLikes(result.newLikes);
-    });
-  };
+  const [state, action, pending] = useActionState(likeRecipeAction, {
+    recipeId: recipe.id,
+    likes: recipe.likes,
+  });
 
   return (
-    <p
-      onClick={isPending ? undefined : handleIncreaseLikes}
-      className={twMerge(
-        "me-2 inline-block rounded border border-orange_2 bg-white p-2 text-[15px] text-orange_2 hover:cursor-pointer hover:bg-orange_2 hover:text-white",
-        isPending &&
-          "border-gray-300 bg-gray-300 hover:cursor-default hover:border-gray-300 hover:bg-gray-300",
-      )}
-    >
-      <i className="fa-regular fa-heart mr-2"></i>
-      {optimisticLikes}
-    </p>
+    <form action={action} className={"inline-block"}>
+      <button
+        type={"submit"}
+        disabled={pending}
+        className={twMerge(
+          "me-2 flex space-x-2 rounded border border-orange_2 bg-white p-2 text-[15px] text-orange_2 hover:cursor-pointer hover:bg-orange_2 hover:text-white disabled:cursor-default disabled:border-gray-900 disabled:bg-gray-300 disabled:text-gray-900 disabled:hover:text-gray-900",
+        )}
+      >
+        <span>{state.likes}</span>
+        {pending ? (
+          <LikeIndicator />
+        ) : (
+          <span>
+            <i className="fa-regular fa-heart mr-2"></i>
+          </span>
+        )}
+      </button>
+    </form>
   );
 }

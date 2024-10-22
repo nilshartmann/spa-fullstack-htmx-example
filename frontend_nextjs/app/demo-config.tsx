@@ -1,3 +1,10 @@
+// initial Demo Konfiguration::::::::::
+
+export const enableSuspenseForFeedback = false;
+export const slowDown_IncreaseLikes = 2400;
+export const slowDown_GetFeedbacks = 600;
+export const showNextLogoInHeader = false;
+
 /**
  * Set to -1 to make searching for longer terms FASTER
  * than searching for shorter terms
@@ -11,14 +18,8 @@ export const recipesPerPage = 6;
 /** slowdown reading of /recipes */
 export const slowDown_GetRecipeList = 0;
 
-/** slowdown increasing likes of a recipe */
-export const slowDown_IncreaseLikes = 0;
-
 /** Single recipe on the /$recipeId route */
 export const slowDown_GetRecipe = 0;
-
-/** list of feedbacks on /$recipeId */
-export const slowDown_GetFeedbacks = 0;
 
 /** delay after submitting the add feedback form */
 export const slowDown_AddFeedback = 0;

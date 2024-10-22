@@ -9,6 +9,7 @@ import FeedbackListLoader from "./FeedbackListLoader.tsx";
 import { Sidebar } from "@/app/components/Sidebar.tsx";
 import { H2 } from "@/app/components/Heading.tsx";
 import IngredientsSection from "@/app/components/recipepage/IngredientsSection.tsx";
+import { enableSuspenseForFeedback } from "@/app/demo-config.tsx";
 
 type RecipePageContentProps = {
   recipe: DetailedRecipeDto;
@@ -34,16 +35,23 @@ export default function RecipePageContent({
         <div className={"md:w-1/3"}>
           <Sidebar>
             <H2>Feedback</H2>
-            <Suspense
-              fallback={
-                <LoadingIndicator>Loading feedback...</LoadingIndicator>
-              }
-            >
+            {enableSuspenseForFeedback ? (
+              <Suspense
+                fallback={
+                  <LoadingIndicator>Loading feedback...</LoadingIndicator>
+                }
+              >
+                <FeedbackListLoader
+                  recipeId={recipe.id}
+                  feedbackPromise={feedbackPromise}
+                />
+              </Suspense>
+            ) : (
               <FeedbackListLoader
                 recipeId={recipe.id}
                 feedbackPromise={feedbackPromise}
               />
-            </Suspense>
+            )}
             <AddFeedbackForm recipeId={recipe.id} />
           </Sidebar>
         </div>

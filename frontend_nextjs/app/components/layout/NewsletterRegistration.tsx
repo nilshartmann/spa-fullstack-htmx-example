@@ -7,6 +7,8 @@ import { subscribeToNewsletter } from "@/app/components/recipify-actions.ts";
 import LoadingIndicator from "@/app/components/LoadingIndicator.tsx";
 import logo from "@/app/components/material/logo.png";
 
+//⚠️ Diese Komponente funktioniert nur, wenn
+//   JavaScript eingeschaltet ist
 export function NewsletterRegistration() {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"Subscribed!" | null>(null);
