@@ -14,8 +14,17 @@ public class HelloWorldController {
         return "hello-world";
     }
 
-    /* todo: Mapping-Methode fuer HTMX Request
+    /*
+     TODO  "/hello-world"-Mapping
 
-        hwc
+        hxc
      */
+    @GetMapping(value = "/hello-world", headers = "HX-Request")
+    String helloWorldResponse() {
+
+        // 🕵️‍♂️  Template angucken!
+        return "hello-world-response";
+    }
+
+
 }

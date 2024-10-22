@@ -18,16 +18,17 @@
 
         <h1>Hello HTMX</h1>
 
+        <%-- hxhw --%>
         <label>
             <input type="checkbox"
-                    <%-- hwa --%>
-                    <%-- ... --%>
-            />
+                   hx-trigger="change"
+                   hx-get="/hello-world"
+                   hx-target="#more-info"
+
+                   />
             I want to know more!
         </label>
 
-        <div id="more-info">
-<%--            I want the info here--%>
-        </div>
+        <div id="more-info"></div>
     </body>
 </html>
