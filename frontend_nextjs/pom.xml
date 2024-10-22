@@ -4,12 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>nh.recipify</groupId>
-    <artifactId>fullstack-oder-htmx-root</artifactId>
+    <artifactId>frontend_nextjs</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <modules>
-        <module>backend</module>
-        <module>frontend_nextjs</module>
-    </modules>
-
 </project>
