@@ -4,7 +4,6 @@
 <!doctype html>
 <html
         lang="en"
-        xmlns:th="http://www.thymeleaf.org"
 >
     <head>
         <meta charset="UTF-8"/>
@@ -51,9 +50,9 @@
                 </div>
             </header>
 
-            <div class="flex-grow">
+            <main class="flex-grow">
                 ${content}
-            </div>
+            </main>
 
             <footer class="h-16 bg-gray-800 font-inter text-sm text-gray-200">
                 <div class="container mx-auto flex h-full items-center justify-between">

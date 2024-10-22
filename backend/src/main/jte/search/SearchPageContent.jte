@@ -32,7 +32,7 @@
                 class="h-8 w-full max-w-full rounded border border-gray-400 bg-white p-6 text-gray-500 hover:shadow-lg"
                 value="${search}"
                 hx-swap="outerHTML"
-                hx-get="/search?slowdown=2400"
+                hx-get="/search?slowdown=0"
                 hx-trigger="input[target.value.length > 2] changed delay:200ms"
                 hx-target="#searchResult"
                 hx-indicator="#searchIndicator"

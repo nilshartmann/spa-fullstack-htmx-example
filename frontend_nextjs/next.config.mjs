@@ -6,6 +6,14 @@ const nextConfig = {
       fullUrl: true,
     },
   },
+  async rewrites() {
+    return [
+      {
+        source: '/backend/:slug*',
+        destination: 'http://localhost:8080/:slug*',
+      },
+    ]
+  },
 };
 
 export default nextConfig;

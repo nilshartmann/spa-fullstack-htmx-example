@@ -13,8 +13,22 @@ function replacePlaceholders(
 const recipifyBackend = process.env.RECIPIFY_BACKEND ?? "http://localhost:8080";
 console.log("Recipify Backend", recipifyBackend);
 
+const runningOnServer = () => typeof window === "undefined";
+
+// backend
 function resolveUrl(path: string, params: EndpointParameters | undefined) {
-  const url = `${recipifyBackend}${path}`;
+  let url = "";
+  if (runningOnServer()) {
+    // on serverside we use the "direct" URL of the backend
+    // Note that this code is also executed when resolveUrl is called from
+    // a client component (!) => while SSR'ing the client component
+    url = `${recipifyBackend}${path}`;
+  } else {
+    // on client side we use Next.js as a "proxy", so we can specify
+    // relative URLs
+    // (see 'rewrites' in next.config)
+    url = `/backend${path}`;
+  }
 
   if (!params) {
     return url;

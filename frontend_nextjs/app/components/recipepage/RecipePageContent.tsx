@@ -4,7 +4,7 @@ import { Instructions } from "./Instructions.tsx";
 import { Suspense } from "react";
 import LoadingIndicator from "../LoadingIndicator.tsx";
 import { AddFeedbackForm } from "./FeedbackForm.tsx";
-import { DetailedRecipeDto } from "../api-types.ts";
+import { DetailedRecipeDto, PageResponseFeedback } from "../api-types.ts";
 import FeedbackListLoader from "./FeedbackListLoader.tsx";
 import { Sidebar } from "@/app/components/Sidebar.tsx";
 import { H2 } from "@/app/components/Heading.tsx";
@@ -12,9 +12,13 @@ import IngredientsSection from "@/app/components/recipepage/IngredientsSection.t
 
 type RecipePageContentProps = {
   recipe: DetailedRecipeDto;
+  feedbackPromise: Promise<PageResponseFeedback>;
 };
 
-export default function RecipePageContent({ recipe }: RecipePageContentProps) {
+export default function RecipePageContent({
+  recipe,
+  feedbackPromise,
+}: RecipePageContentProps) {
   return (
     <div>
       <RecipeBanner recipe={recipe} />
@@ -35,7 +39,10 @@ export default function RecipePageContent({ recipe }: RecipePageContentProps) {
                 <LoadingIndicator>Loading feedback...</LoadingIndicator>
               }
             >
-              <FeedbackListLoader recipeId={recipe.id} />
+              <FeedbackListLoader
+                recipeId={recipe.id}
+                feedbackPromise={feedbackPromise}
+              />
             </Suspense>
             <AddFeedbackForm recipeId={recipe.id} />
           </Sidebar>

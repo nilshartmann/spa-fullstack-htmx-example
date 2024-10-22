@@ -15,11 +15,16 @@ public class HelloWorldController {
     }
 
     /*
-     TODO
+     TODO  "/hello-world"-Mapping
 
-     - Template hello-response.html mit th:fragment zeigen
-     - /hello-world-Mapping mit headers=HX-Request
-      - Antwort z.B. "hello-response :: response"
+        hxc
      */
+    @GetMapping(value = "/hello-world", headers = "HX-Request")
+    String helloWorldResponse() {
+
+        // 🕵️‍♂️  Template angucken!
+        return "hello-world-response";
+    }
+
 
 }

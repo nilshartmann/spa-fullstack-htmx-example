@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { GlobalPageLayout } from "@/app/components/layout/GlobalPageLayout";
+import RecipifyQueryProvider from "@/app/query-provider.tsx";
 
 export const metadata: Metadata = {
   title: "Recipify Next.js demo",
@@ -23,7 +24,9 @@ export default function RootLayout({
         <title>Recipify Next.js Demo</title>
       </head>
       <body suppressHydrationWarning>
-        <GlobalPageLayout>{children}</GlobalPageLayout>
+        <RecipifyQueryProvider>
+          <GlobalPageLayout>{children}</GlobalPageLayout>
+        </RecipifyQueryProvider>
       </body>
     </html>
   );

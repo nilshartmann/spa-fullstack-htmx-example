@@ -16,12 +16,16 @@
     "openapi:watch": "onchange -i ../backend/generated-api-doc.yaml -- pnpm openapi:generate"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.59.15",
+    "@tanstack/react-query-devtools": "^5.59.15",
     "bootstrap-icons": "^1.11.2",
     "date-fns": "^3.0.6",
+    "ky": "^1.7.2",
     "next": "15.0.0-rc.0",
     "react": "19.0.0-rc-3563387fe3-20240621",
     "react-dom": "19.0.0-rc-3563387fe3-20240621",
     "tailwind-merge": "^2.2.0",
+    "use-debounce": "^10.0.4",
     "zod": "^3.22.4",
     "zod-form-data": "^2.0.2"
   },

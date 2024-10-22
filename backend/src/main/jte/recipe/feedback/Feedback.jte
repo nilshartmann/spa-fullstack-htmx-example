@@ -10,7 +10,7 @@
     <div
             id="feedbackList"
             hx-trigger="load"
-            hx-get="/recipes/${recipeId}/feedback?slowdown=2400"
+            hx-get="/recipes/${recipeId}/feedback?slowdown=0"
             hx-indicator="#feedbackListIndicator"
     >
     </div>
@@ -25,7 +25,7 @@
 
     <!-- todo #12: Loading Indicator
      - zeigen: was passiert, wenn wir den Request langsam machen?
-       '(slowdown=2400)}"
+       '(slowdown=0)}"
        - beim ersten Aufruf
        - beim Blättern durch die Bewertungen
 

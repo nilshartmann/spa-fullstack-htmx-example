@@ -1,5 +1,4 @@
 import {
-  GetRecipeFeedbacksResponse,
   NewFeedback,
   PageResponseRecipeDto,
 } from "@/app/components/api-types.ts";
@@ -57,17 +56,16 @@ export function fetchRecipe(recipeId: string) {
   );
 }
 
-export function fetchFeedback(
-  recipeId: string,
-): Promise<GetRecipeFeedbacksResponse> {
+export function fetchFeedback(recipeId: string, feedbackPage: number) {
   return fetchFromApi(
-    getEndpointConfig("get", "/api/recipes/{recipeId}/feedbacks"),
+    getEndpointConfig("get", "/api/recipes/{recipeId}/feedback"),
     {
       path: {
         recipeId,
       },
       query: {
         slowdown: slowDown_GetFeedbacks,
+        page: feedbackPage,
       },
     },
   );

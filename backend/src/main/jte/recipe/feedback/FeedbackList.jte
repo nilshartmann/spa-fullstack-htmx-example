@@ -43,7 +43,7 @@
     @if(feedback.hasNext())
         <a
                 href="/recipes/${recipeId}?feedback_page=${feedback.nextPage()}"
-                hx-get="/recipes/${recipeId}/feedback?page=${feedback.nextPage()}&slowdown=2400"
+                hx-get="/recipes/${recipeId}/feedback?page=${feedback.nextPage()}&slowdown=0"
                 hx-push-url="/recipes/${recipeId}?feedback_page=${feedback.nextPage()}"
                 hx-target="#feedbackList"
                 hx-indicator="#feedbackListIndicator"

@@ -30,6 +30,7 @@ export default function GlobalNavBar() {
       <NavLink href={"/"}>Home</NavLink>
       <NavLink href={"/about"}>About</NavLink>
       <NavLink href={"/privacy"}>Privacy</NavLink>
+      <NavLink href={"/search"}>Search</NavLink>
     </nav>
   );
 }

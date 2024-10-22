@@ -3,25 +3,23 @@ package nh.recipify.domain.web;
 import jakarta.persistence.EntityNotFoundException;
 import nh.recipify.domain.MultiViews;
 import nh.recipify.domain.api.DetailedRecipeDto;
-import nh.recipify.domain.api.PageResponse;
-import nh.recipify.domain.api.RecipeApiController;
 import nh.recipify.domain.api.RecipeDto;
 import nh.recipify.domain.model.Feedback;
 import nh.recipify.domain.model.FeedbackRepository;
-import nh.recipify.domain.model.Recipe;
 import nh.recipify.domain.model.RecipeRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Optional;
 
-import static java.util.function.Predicate.not;
 import static nh.recipify.domain.api.Utils.sleepFor;
 
 @Controller
@@ -139,8 +137,10 @@ public class RecipeWebController {
     }
 
     @GetMapping(value = "/recipes/{recipeId}", headers = "HX-Request")
-    public String recipePage(@PathVariable Long recipeId, Model model) {
+    public String recipePage(@PathVariable Long recipeId, Model model, @RequestParam("slowdown") Optional<Long> slowdown) {
         log.info("HX Request for Recipe-Id '{}'", recipeId);
+
+        sleepFor("HX-Request recipe for recipe-id " + recipeId, slowdown);
 
         var recipe = recipeRepository.findById(recipeId)
             .orElseThrow(() -> new EntityNotFoundException("Receipe " + recipeId + " not found."));

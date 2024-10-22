@@ -4,12 +4,14 @@ import { Input } from "../Input.tsx";
 import { Button } from "../Button.tsx";
 import React, { useState, useTransition } from "react";
 import { subscribeToNewsletter } from "@/app/components/recipify-actions.ts";
+import LoadingIndicator from "@/app/components/LoadingIndicator.tsx";
+import logo from "@/app/components/material/logo.png";
 
 export function NewsletterRegistration() {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"Subscribed!" | null>(null);
 
-  const [isPending, startTransition] = useTransition();
+  const [isRequestRunning, startTransition] = useTransition();
 
   const handleEmailChange = (e: string) => {
     setStatus(null);
@@ -23,7 +25,7 @@ export function NewsletterRegistration() {
     });
   };
 
-  const saveDisabled = email.length < 1 || isPending;
+  const saveDisabled = email.length < 1 || isRequestRunning;
 
   return (
     <div
@@ -34,13 +36,17 @@ export function NewsletterRegistration() {
         <Input
           value={email}
           onChange={(e) => handleEmailChange(e.target.value)}
-          disabled={isPending}
+          disabled={isRequestRunning}
           placeholder={"E-Mail"}
         />
       </div>
       <div>
         <Button disabled={saveDisabled} checked={status === "Subscribed!"}>
-          <button onClick={handleSubmit}>Subscribe</button>
+          {isRequestRunning ? (
+            <LoadingIndicator secondary placeholder={<img src={logo.src} />} />
+          ) : (
+            <button onClick={handleSubmit}>Subscribe</button>
+          )}
         </Button>
       </div>
       <div>{status === "Subscribed!" && "Subscribed!"}</div>

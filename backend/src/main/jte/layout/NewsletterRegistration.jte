@@ -15,16 +15,17 @@
 <%--         -->--%>
 <form
         class="max-w-1/4 flex items-center space-x-4 pe-2 ps-2 font-barlow"
-        hx-post="/newsletter?slowdown=2400"
+        hx-post="/newsletter?slowdown=24000"
         hx-disabled-elt="this, input, button"
         hx-swap="outerHTML"
+        hx-indicator="#newsletterLoading"
 >
     <label for="newsletterEmailInput">Don't miss new recipes. Subscribe to newsletter</label>
     <div class="max-w-64">
         <input
                 id="newsletterEmailInput"
                 name="newsletterEmail"
-                type="email"
+                type="input"
                 class="h-8 w-full max-w-full rounded border border-gray-400 bg-white p-2 text-gray-500 disabled:bg-gray-200"
                 value="${newsletterEmail}"
                 placeholder="E-Mail"
@@ -35,10 +36,15 @@
         checked="success".equals(newsletterResult),
         disabled=false,
         content = @`
-            <button
-                    id="subscribeButton"
-                    type="submit"
-            >Subscribe</button>
+            <div class="flex space-x-2">
+                <button
+                        id="subscribeButton"
+                        type="submit"
+                >Subscribe
+
+                </button>
+                @template.components.LoadingIndicator(id = "newsletterLoading", secondary = true)
+            </div>
         `)
     </div>
     @if("success".equals(newsletterResult))

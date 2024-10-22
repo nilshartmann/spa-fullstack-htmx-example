@@ -1,14 +1,15 @@
 import { formatDate } from "../format-date.ts";
 import { RatingStars } from "../RatingStars.tsx";
-import { Feedback } from "../api-types.ts";
+import { PageResponseFeedback } from "../api-types.ts";
+import PageLinkButton from "@/app/components/recipepage/PageLinkButton.tsx";
 
 type FeedbackListProps = {
-  feedbacks: Feedback[];
+  feedback: PageResponseFeedback;
 };
-export default function FeedbackList({ feedbacks }: FeedbackListProps) {
+export default function FeedbackList({ feedback }: FeedbackListProps) {
   return (
     <>
-      {feedbacks.map((f) => {
+      {feedback.content.map((f) => {
         return (
           <div
             key={f.id}
@@ -29,6 +30,14 @@ export default function FeedbackList({ feedbacks }: FeedbackListProps) {
           </div>
         );
       })}
+      <div className="flex w-full justify-center space-x-12">
+        {feedback.hasPrevious && (
+          <PageLinkButton page={feedback.pageNumber - 1} label={"<"} />
+        )}
+        {feedback.hasNext && (
+          <PageLinkButton page={feedback.pageNumber + 1} label={">"} />
+        )}
+      </div>
     </>
   );
 }
