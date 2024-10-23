@@ -18,6 +18,11 @@ public class LoggingInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         request.setAttribute("startTime", System.currentTimeMillis());
+        log.info("\n  <STARTING> {} {}\n",
+            response.getStatus(),
+            request.getRequestURL()
+        );
+
         return true;
     }
 
@@ -37,7 +42,7 @@ public class LoggingInterceptor implements HandlerInterceptor {
             }
         }
 
-        log.info("\n  {} {} - {}ms\n{}",
+        log.info("\n  <FINISHED> {} {} - {}ms\n{}",
             response.getStatus(),
             request.getRequestURL(),
             timeTaken,

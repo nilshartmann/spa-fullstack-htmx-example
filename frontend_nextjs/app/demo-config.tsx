@@ -1,9 +1,11 @@
 // initial Demo Konfiguration::::::::::
 
 export const enableSuspenseForFeedback = false;
-export const slowDown_IncreaseLikes = 2400;
+export const slowDown_IncreaseLikes = 1200;
 export const slowDown_GetFeedbacks = 600;
+export const slowDown_GetRecipe = 0;
 export const showNextLogoInHeader = false;
+// //////////////////////////////////////////////////////
 
 export const enableTanstackQueryDevTools = false;
 
@@ -19,9 +21,6 @@ export const recipesPerPage = 6;
 
 /** slowdown reading of /recipes */
 export const slowDown_GetRecipeList = 0;
-
-/** Single recipe on the /$recipeId route */
-export const slowDown_GetRecipe = 0;
 
 /** delay after submitting the add feedback form */
 export const slowDown_AddFeedback = 0;

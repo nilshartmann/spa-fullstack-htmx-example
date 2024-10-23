@@ -15,7 +15,7 @@ public class Utils {
 
     public static void sleepFor(String operation, long duration) {
         if (duration > 0) {
-            log.info("Sleep for {} ms.", duration);
+//            log.info("Sleep for {} ms.", duration);
             try {
                 Thread.sleep(duration);
             } catch (InterruptedException e) {

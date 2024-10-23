@@ -7,6 +7,13 @@
             <%--            SCHRITT 1: Automatisch laden --%>
             <%--            fl1                          --%>
 
+            hx-trigger="load"
+            hx-get="/recipes/${recipeId}/feedback?slowdown=3000"
+            hx-indicator="#feedbackListIndicator"
+            <%--            TODO: In RecipeSummaryCard.jte: --%>
+            <%--              beim a-Element: hx-get="/recipes/${recipe.id()}?slowdown=2000"--%>
+
+
     >
     </div>
 

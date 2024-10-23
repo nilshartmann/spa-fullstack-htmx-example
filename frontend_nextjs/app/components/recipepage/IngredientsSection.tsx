@@ -8,6 +8,12 @@ type IngredientsProps = {
   ingredients: Ingredient[];
 };
 export default function IngredientsSection({ ingredients }: IngredientsProps) {
+  // Diese Komponente wird IM BROWSER ausgeführt
+  //   -> JS-Code kommet in den Browser
+  // Aufgerufen wird sie aber aus einer SERVER-Komponente
+  //   -> RecipePageContent.tsx
+  //   -> 'ingredients' werden serialisiert
+
   const [servings, setServings] = useState(4);
   return (
     <>

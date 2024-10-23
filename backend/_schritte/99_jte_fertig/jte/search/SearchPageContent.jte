@@ -10,6 +10,19 @@
 
 <main>
     <div class="container mx-auto mt-8 flex max-w-96 pt-8">
+        <!-- todo 35:
+            - handleInputChange Implementierung zeigen (unten)
+            - hx-on:input handleInputChange aufrufen
+        -->
+
+        <!-- todo 30:
+         - hx-get /search
+         - hx-trigger="input[target.value.length > 2] changed delay:200ms"
+                          ^-- 🤔 was bedeutet das?
+         - hx-target #searchResult
+         - hx-indicator #searchIndicator
+              ^-- mit Loading-Indicator vergleichen, der in SPA werkelt
+         -->
         <input
                 type="search"
                 name="search"
@@ -26,12 +39,20 @@
                 hx-on:input="handleInputChange(event)"
 
         />
+        <!-- todo 32:
+         - hx-get auf /search/reset
+            -> was macht das?
+          - swap outerHTML
+         - hx-target main
+         - hx-push-purl auf /
+        -->
         <button
                 class="ms-2 cursor-pointer text-gray-500 underline hover:text-gray-900"
                 hx-get="/search/reset"
                 hx-swap="outerHTML"
                 hx-target="main"
                 hx-push-url="/"
+
         >
             Clear
         </button>
@@ -42,10 +63,9 @@
     </div>
 
     @template.components.LoadingIndicator(id = "searchIndicator")
-
     @template.search.SearchResult(fresh = fresh, recipes = recipes)
 
-    @template.search.FindMoreButton(hasMore = hasMore, nextPage = nextPage, search = search)
+    @template.search.SearchPagination(hasMore = hasMore, nextPage = nextPage, search = search)
 
     <script>
       function handleInputChange(e) {

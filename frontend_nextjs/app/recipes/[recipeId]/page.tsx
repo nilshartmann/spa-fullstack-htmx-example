@@ -15,6 +15,10 @@ export default async function RecipePage({
   params,
   searchParams,
 }: RecipePageProps) {
+  //
+  // !! Das hier ist SERVER-SEITIGER Code !!
+  //
+
   const feedbackPage = parseInt(searchParams.feedback_page || "0");
 
   const feedbackPromise = fetchFeedback(params.recipeId, feedbackPage);

@@ -36,6 +36,9 @@ export default function RecipePageContent({
           <Sidebar>
             <H2>Feedback</H2>
             {enableSuspenseForFeedback ? (
+              // Hier hört React auf dem Server auf zu rendern,
+              // und schickt den inneren Teil ("FeedbackListLoader")
+              // hinterher
               <Suspense
                 fallback={
                   <LoadingIndicator>Loading feedback...</LoadingIndicator>

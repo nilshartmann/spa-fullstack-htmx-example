@@ -4,6 +4,7 @@ import jakarta.persistence.EntityNotFoundException;
 import nh.recipify.domain.MultiViews;
 import nh.recipify.domain.api.DetailedRecipeDto;
 import nh.recipify.domain.api.RecipeDto;
+import nh.recipify.domain.api.Utils;
 import nh.recipify.domain.model.Feedback;
 import nh.recipify.domain.model.FeedbackRepository;
 import nh.recipify.domain.model.RecipeRepository;
@@ -101,8 +102,11 @@ public class RecipeWebController {
 
         // todo #40:
         //   - als erstes View: "search :: pagination":
-        //       return MultiViews.of("search :: pagination", "search :: searchResult");
-        return MultiViews.of("search/SearchPagination", "search/SearchResult");
+        //       return MultiViews.of("search/SearchPagination", "search/SearchResult");
+        return MultiViews.of(
+            "search/FindMoreButton",
+            "search/SearchResult"
+        );
     }
 
     @GetMapping(value = "/search/reset", headers = "HX-Request")
@@ -154,8 +158,11 @@ public class RecipeWebController {
     @GetMapping(value = "/recipes/{recipeId}")
     public String recipePage(@PathVariable Long recipeId,
                              @RequestParam("feedback_page") Optional<Integer> feedbackPage,
+                             @RequestParam Optional<Long> slowdown,
                              Model model) {
         log.info("Recipe Page for Recipe-Id '{}'", recipeId);
+
+        Utils.sleepFor("Getting Recipe-Id", slowdown);
 
         var recipe = recipeRepository.findById(recipeId)
             .orElseThrow(() -> new EntityNotFoundException("Receipe " + recipeId + " not found."));
