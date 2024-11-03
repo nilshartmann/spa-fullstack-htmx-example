@@ -31,7 +31,7 @@ export default async function RecipeListPage({
 
         <RecipeList recipesPromise={result} />
 
-        <div className={"mt-8 flex justify-center"}>
+        <div className={"mb-8 mt-8 flex justify-center"}>
           <PaginationBar
             totalPagesPromise={totalPagesPromise}
             currentPage={params.page}
