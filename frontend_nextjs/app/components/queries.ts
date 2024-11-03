@@ -56,7 +56,7 @@ export function fetchRecipe(recipeId: string) {
   );
 }
 
-export function fetchFeedback(recipeId: string, feedbackPage: number) {
+export function fetchFeedback(recipeId: string, feedbackPage: number = 0) {
   return fetchFromApi(
     getEndpointConfig("get", "/api/recipes/{recipeId}/feedback"),
     {
