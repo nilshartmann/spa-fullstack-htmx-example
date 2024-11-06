@@ -20,7 +20,10 @@
                             class="cursor-pointer hover:text-orange_2 hover:underline"
 
 <%--                            "normaler" Link--%>
-                            href="/recipes/${recipe.id()}"
+                            <%--🤔 warum select="main"? --%>
+                            <%--🕵️‍♀️ Netzwerkverkehr --%>
+                            <%--🤔 Welche Alternative gäbe es dazu? --%>
+
 
                             <%--SCHRITT 1: Link "SPA-fähig" machen                             --%>
                             <%--                            sw1  --%>
