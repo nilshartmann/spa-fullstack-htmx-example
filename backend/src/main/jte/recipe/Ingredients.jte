@@ -30,7 +30,12 @@
         >
             <i class="fa-regular fa-circle-check me-2 text-orange_2"></i>
             <span class="font-inter text-gray-500">
-                <%--  🕵️‍Template, JavaScript und Alpine gemischt --%>
+                <%--
+                   🕵️‍Template, JavaScript und Alpine gemischt
+
+                   Das Template generiert (!) JavaScript-Code (!) 👻
+
+                --%>
                 <span x-text="(${i.getAmount()} / 4) * servings"></span>
             ${i.getUnit()} ${i.getName()}
           </span>

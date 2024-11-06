@@ -13,6 +13,18 @@
         hx-swap-oob="true"
 >
     @if(hasMore)
+<%--
+
+   /search?page=XXX liefert zwei Schnipsel zurück:
+       (RecipeWebController.searchRecipes)
+
+       1. diesen Button (mit aktualisierten Links für die jeweils folgende Seite)
+          - der Button ersetzt sich selbst über die "id" und "hx-swap-oob"
+       2. Die neuen Suchergebnisse (max. 2 weitere Rezepte)
+          - diese werden an das div#searchResult ans Ende eingeführt
+            (SearchResult.jte)
+
+  --%>
         <a
                 href="/search?page=${nextPage}&search=${search}"
                 hx-get="/search?page=${nextPage}"
