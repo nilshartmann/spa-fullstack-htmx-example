@@ -1,10 +1,10 @@
 "use client";
 import { Input } from "@/app/components/Input.tsx";
-import Label from "../components/Label";
+import Label from "../../components/Label.tsx";
 import { Suspense, useState } from "react";
 import LoadingIndicator from "@/app/components/LoadingIndicator.tsx";
 import { useDebounce } from "use-debounce";
-import RecipeSearch from "@/app/search/RecipeSearch.tsx";
+import RecipeSearch from "@/app/recipes/search/RecipeSearch.tsx";
 import { usePathname, useSearchParams } from "next/navigation";
 import { debounce_search } from "@/app/demo-config.tsx";
 

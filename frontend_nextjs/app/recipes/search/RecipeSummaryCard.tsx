@@ -4,7 +4,7 @@ import { H2 } from "@/app/components/Heading.tsx";
 import Link from "next/link";
 import { twMerge } from "tailwind-merge";
 import LoadingIndicator from "@/app/components/LoadingIndicator.tsx";
-import RecipeSummaryDetails from "@/app/search/RecipeSummaryDetails.tsx";
+import RecipeSummaryDetails from "@/app/recipes/search/RecipeSummaryDetails.tsx";
 
 type RecipeSummaryCardProps = {
   recipe: RecipeSummaryDto;
@@ -23,10 +23,10 @@ export default function RecipeSummaryCard({ recipe }: RecipeSummaryCardProps) {
             <p className="font-space text-sm font-medium uppercase tracking-[2px] text-red">
               {recipe.mealType}
             </p>
-            <H2 className="font-space font-bold">
+            <H2 className="font-space font-bold hover:cursor-pointer">
               <Link
                 href={`/recipes/${recipe.id}`}
-                className="cursor-pointer hover:text-orange_2 hover:underline"
+                className="hover:cursor-pointer hover:text-orange_2 hover:underline"
               >
                 {recipe.title}
               </Link>

@@ -1,8 +1,8 @@
 import Label from "@/app/components/Label.tsx";
-import RecipeSummaryCard from "@/app/search/RecipeSummaryCard.tsx";
+import RecipeSummaryCard from "@/app/recipes/search/RecipeSummaryCard.tsx";
 import { Button } from "@/app/components/Button.tsx";
 import LoadingIndicator from "@/app/components/LoadingIndicator.tsx";
-import { useSearchQuery } from "@/app/search/use-search-query.ts";
+import { useSearchQuery } from "@/app/recipes/search/use-search-query.ts";
 import { RecipeSummaryDto } from "@/app/components/api-types.ts";
 
 type SearchProps = {
