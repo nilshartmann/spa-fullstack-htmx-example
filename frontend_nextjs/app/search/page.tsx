@@ -6,6 +6,7 @@ import LoadingIndicator from "@/app/components/LoadingIndicator.tsx";
 import { useDebounce } from "use-debounce";
 import RecipeSearch from "@/app/search/RecipeSearch.tsx";
 import { usePathname, useSearchParams } from "next/navigation";
+import { debounce_search } from "@/app/demo-config.tsx";
 
 export default function SearchPage() {
   // updating the search params without re-fetching from server:
@@ -13,7 +14,8 @@ export default function SearchPage() {
   const searchParams = useSearchParams();
   const searchTermInParams = searchParams.get("search");
   const [search, setSearch] = useState(searchTermInParams || "");
-  const [searchTerm] = useDebounce(search, 200);
+  const [searchTerm] = useDebounce(search, debounce_search);
+
   const pathname = usePathname();
 
   const handleSearchChange = (newSearch: string) => {

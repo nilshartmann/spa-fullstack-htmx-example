@@ -16,6 +16,8 @@ export const enableTanstackQueryDevTools = false;
  */
 export const slowDown_search = 1200;
 
+export const debounce_search = 0;
+
 /** number of recipes on /recipes */
 export const recipesPerPage = 6;
 
