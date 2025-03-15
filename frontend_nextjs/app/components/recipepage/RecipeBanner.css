@@ -1,5 +1,6 @@
 .recipify-header-wrap {
   position: relative;
+  z-index: 1;
 }
 
 .recipify-header-wrap::before {
@@ -16,6 +17,7 @@
   background-position: center;
   background-image: var(--recipe-bg-image);
   pointer-events: none;
+  z-index: -1;
 }
 
 .demo-content {
