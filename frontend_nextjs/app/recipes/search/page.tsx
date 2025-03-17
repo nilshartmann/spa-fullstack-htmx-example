@@ -35,6 +35,8 @@ export default function SearchPage() {
   return (
     <>
       <main className={"flex-grow"}>
+        {/*Funktioniert nicht - womöglich buggy in der RC Version von Next*/}
+        <title>{search} - Recipify Next.js Demo</title>
         <div className="container mx-auto mt-8 flex max-w-96 pt-8">
           <Input
             type="search"
