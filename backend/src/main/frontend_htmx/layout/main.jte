@@ -43,7 +43,7 @@
                                 <a href="/">Recipify</a>
                             </h1>
                             <div class="ms-2 shrink-0 bg-white p-1 text-xl">
-                                <span class="text-green">HTMX/JTE</span> Edition
+                                <span class="text-green">HTMX</span> Edition
                             </div>
                         </div>
                     </div>

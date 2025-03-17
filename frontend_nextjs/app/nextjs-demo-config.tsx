@@ -6,7 +6,7 @@ export const enableSuspenseForFeedback = false;
 export const slowDown_IncreaseLikes = 1200;
 export const slowDown_GetFeedbacks = 600;
 export const slowDown_GetRecipe = 0;
-export const showNextLogoInHeader = false;
+export const showNextLogoInHeader = true;
 
 // Für Request-Demo auf 0 setzen:
 export const debounce_search = 200;

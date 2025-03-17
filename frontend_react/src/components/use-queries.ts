@@ -18,7 +18,7 @@ import {
   slowDown_search,
   slowDown_searchDetails,
   slowDown_SubscribeNewsletter,
-} from "../demo-config.tsx";
+} from "../react-demo-config.tsx";
 
 export function useGetRecipeQuery(
   recipeId: string,

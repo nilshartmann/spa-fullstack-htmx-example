@@ -6,7 +6,7 @@ import LoadingIndicator from "@/app/components/LoadingIndicator.tsx";
 import { useDebounce } from "use-debounce";
 import RecipeSearch from "@/app/recipes/search/RecipeSearch.tsx";
 import { usePathname, useSearchParams } from "next/navigation";
-import { debounce_search } from "@/app/demo-config.tsx";
+import { debounce_search } from "@/app/nextjs-demo-config.tsx";
 
 export default function SearchPage() {
   // updating the search params without re-fetching from server:

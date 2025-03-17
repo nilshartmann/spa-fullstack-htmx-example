@@ -1,7 +1,7 @@
 "use client";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { enableTanstackQueryDevTools } from "@/app/demo-config.tsx";
+import { enableTanstackQueryDevTools } from "@/app/nextjs-demo-config.tsx";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 const queryClient = new QueryClient({

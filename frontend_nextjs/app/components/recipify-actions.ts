@@ -5,7 +5,7 @@ import {
   fetchFromApi,
   getEndpointConfig,
 } from "@/app/components/fetch-from-api.ts";
-import { slowDown_SubscribeNewsletter } from "@/app/demo-config.tsx";
+import { slowDown_SubscribeNewsletter } from "@/app/nextjs-demo-config.tsx";
 
 type HandleIncreaseLikeActionState = {
   recipeId: string;

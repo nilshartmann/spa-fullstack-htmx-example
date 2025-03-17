@@ -5,7 +5,7 @@ import {
   fetchFromApi,
   getEndpointConfig,
 } from "@/app/components/fetch-from-api.ts";
-import { slowDown_GetRecipe } from "@/app/demo-config.tsx";
+import { slowDown_GetRecipe } from "@/app/nextjs-demo-config.tsx";
 
 type RecipeSummaryDetailsProps = {
   recipeId: string;

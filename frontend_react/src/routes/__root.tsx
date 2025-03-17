@@ -5,6 +5,8 @@ import { GlobalLoadingIndicator } from "../components/GlobalLoadingIndicator.tsx
 import { Timer } from "../components/Timer.tsx";
 import z from "zod";
 import { NewsletterRegistration } from "../components/NewsletterRegistration.tsx";
+import { showGlobalServings } from "../react-demo-config.tsx";
+import GlobalServingsWidget from "./recipes/-components/GlobalServingsWidget.tsx";
 
 const RoutePageParams = z.object({
   feedback_page: z.number().optional().default(0),
@@ -40,10 +42,10 @@ export default function GlobalPageLayout() {
                 </Link>
               </H1>
               <div className={"ms-2 shrink-0 bg-white p-1 text-xl"}>
-                <span className="text-green">SPA</span> Edition
+                <span className="text-green">React </span> Edition
               </div>
             </div>
-            {/*<GlobalServingsWidget />*/}
+            {showGlobalServings && <GlobalServingsWidget />}
             <Timer />
           </div>
         </div>

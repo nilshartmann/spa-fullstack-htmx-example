@@ -3,7 +3,7 @@ import {
   fetchFromApi,
   getEndpointConfig,
 } from "@/app/components/fetch-from-api.ts";
-import { slowDown_search } from "@/app/demo-config.tsx";
+import { slowDown_search } from "@/app/nextjs-demo-config.tsx";
 import { RecipeSummaryDto } from "@/app/components/api-types.ts";
 
 export function useSearchQuery(search: string) {

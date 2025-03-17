@@ -14,7 +14,7 @@ import {
   slowDown_GetRecipe,
   slowDown_GetRecipeList,
   slowDown_IncreaseLikes,
-} from "@/app/demo-config.tsx";
+} from "@/app/nextjs-demo-config.tsx";
 
 export function fetchRecipes(
   page: number = 0,

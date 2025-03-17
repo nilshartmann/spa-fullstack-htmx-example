@@ -4,7 +4,7 @@ import {
   fetchFromApi,
   getEndpointConfig,
 } from "@/app/components/fetch-from-api.ts";
-import { slowDown_IncreaseLikes } from "@/app/demo-config.tsx";
+import { slowDown_IncreaseLikes } from "@/app/nextjs-demo-config.tsx";
 import { revalidateTag } from "next/cache";
 
 export async function increaseLikes(recipeId: string) {

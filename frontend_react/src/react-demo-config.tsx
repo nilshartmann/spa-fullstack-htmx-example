@@ -1,3 +1,13 @@
+// -----------------------------------------------------------------------------
+//
+//    Demo Configuration for REACT example app
+//
+// -----------------------------------------------------------------------------
+export const showGlobalServings = true;
+
+// //////////////////////////////////////////////////////
+export const enableTanstackQueryDevTools = false;
+
 /**
  * Set to -1 to make searching for longer terms FASTER
  * than searching for shorter terms

@@ -2,7 +2,7 @@ import { H1 } from "../Heading.tsx";
 
 import { ReactNode } from "react";
 import Link from "next/link";
-import { showNextLogoInHeader } from "@/app/demo-config.tsx";
+import { showNextLogoInHeader } from "@/app/nextjs-demo-config.tsx";
 
 type RecipesHeaderProps = {
   children?: ReactNode;
@@ -27,7 +27,7 @@ export default function RecipesHeader({ children }: RecipesHeaderProps) {
               </H1>
               {showNextLogoInHeader && (
                 <div className={"ms-2 shrink-0 bg-white p-1 text-xl"}>
-                  <span className="text-green">Next.js/React</span> Edition
+                  <span className="text-green">Next.js</span> Edition
                 </div>
               )}
             </div>
