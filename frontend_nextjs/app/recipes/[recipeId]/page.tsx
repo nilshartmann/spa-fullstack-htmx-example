@@ -1,6 +1,14 @@
 import { fetchFeedback, fetchRecipe } from "@/app/components/queries.ts";
-import RecipePageContent from "@/app/components/recipepage/RecipePageContent.tsx";
 import { notFound } from "next/navigation";
+import { RecipeBanner } from "@/app/components/recipepage/RecipeBanner.tsx";
+import TwoColumnLayout from "@/app/components/layout/TwoColumnLayout.tsx";
+import RecipeDetails from "@/app/components/recipepage/RecipeDetails.tsx";
+import { H2 } from "@/app/components/Heading.tsx";
+import { Sidebar } from "@/app/components/Sidebar.tsx";
+import { AddFeedbackForm } from "@/app/components/recipepage/FeedbackForm.tsx";
+import FeedbackList from "@/app/components/recipepage/FeedbackList.tsx";
+import LoadingIndicator from "@/app/components/LoadingIndicator.tsx";
+import { Suspense } from "react";
 
 type RecipePageProps = {
   searchParams: {
@@ -15,24 +23,39 @@ export default async function RecipePage({
   params,
   searchParams,
 }: RecipePageProps) {
-  //
-  // !! Das hier ist SERVER-SEITIGER Code !!
-  //
-
   const feedbackPage = parseInt(searchParams.feedback_page || "0");
 
   const feedbackPromise = fetchFeedback(params.recipeId, feedbackPage);
 
-  const recipe = await fetchRecipe(params.recipeId);
+  const response = await fetchRecipe(params.recipeId);
 
-  if (!recipe) {
+  if (!response) {
     notFound();
   }
 
+  const recipe = response.recipe;
+
   return (
-    <RecipePageContent
-      recipe={recipe.recipe}
-      feedbackPromise={feedbackPromise}
-    />
+    <div>
+      <RecipeBanner recipe={recipe} />
+
+      <TwoColumnLayout
+        sidebar={
+          <Sidebar>
+            <H2>Feedback</H2>
+            <Suspense
+              fallback={
+                <LoadingIndicator>Loading feedback...</LoadingIndicator>
+              }
+            >
+              <FeedbackList feedbackPromise={feedbackPromise} />
+            </Suspense>
+            <AddFeedbackForm recipeId={recipe.id} />
+          </Sidebar>
+        }
+      >
+        <RecipeDetails recipe={recipe} />
+      </TwoColumnLayout>
+    </div>
   );
 }

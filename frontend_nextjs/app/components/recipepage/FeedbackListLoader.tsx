@@ -10,7 +10,6 @@ export default async function FeedbackListLoader({
   feedbackPromise,
 }: FeedbackListProps) {
   console.log("FeedbackListLoader", Date.now());
-  const data = await feedbackPromise;
 
-  return <FeedbackList feedback={data} />;
+  return <FeedbackList feedbackPromise={feedbackPromise} />;
 }

@@ -16,22 +16,26 @@
                     ${recipe.mealType()}
                 </p>
                 <h2 class="font-space text-2xl font-bold">
+                    <!-- todo:
+
+                    - 🤔  warum verwenden hier nicht den Link "als Link"?
+                    - 🤔  ...warum brauchen wir "SPA-Verhalten"?
+
+                    - hx-get, analog zu href
+                    - hx-push-url, analog zu href
+                    - target muss 'main' sein
+                        ^-- 🤔 ist das eigentlich ein Problem?
+                    -->
                     <a
+                            href="/recipes/${recipe.id()}"
+                            hx-get="/recipes/${recipe.id()}?slowdown=2000"
+                            hx-push-url="/recipes/${recipe.id()}"
+                            hx-target="main"
+                            hx-select="main"
+                            hx-swap="outerHTML"
                             class="cursor-pointer hover:text-orange_2 hover:underline"
-
-<%--                            "normaler" Link--%>
-                            <%--🤔 warum select="main"? --%>
-                            <%--🕵️‍♀️ Netzwerkverkehr --%>
-                            <%--🤔 Welche Alternative gäbe es dazu? --%>
-
-
-                            <%--SCHRITT 1: Link "SPA-fähig" machen                             --%>
-                            <%--                            sw1  --%>
-
-                            <%--SCHRITT 2: Korrektes Ziel setzen --%>
-                            <%--                            sw2  --%>
                     >
-                       ${recipe.title()}
+                        ${recipe.title()}
                     </a>
                 </h2>
             </div>

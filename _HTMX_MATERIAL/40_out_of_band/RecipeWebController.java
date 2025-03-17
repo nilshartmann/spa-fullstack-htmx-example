@@ -4,7 +4,6 @@ import jakarta.persistence.EntityNotFoundException;
 import nh.recipify.domain.MultiViews;
 import nh.recipify.domain.api.DetailedRecipeDto;
 import nh.recipify.domain.api.RecipeDto;
-import nh.recipify.domain.api.Utils;
 import nh.recipify.domain.model.Feedback;
 import nh.recipify.domain.model.FeedbackRepository;
 import nh.recipify.domain.model.RecipeRepository;
@@ -39,17 +38,11 @@ public class RecipeWebController {
     @GetMapping("/")
     public String recipesIndex(Model model) {
 
-        model.addAttribute("recipes", Page.empty());
+        model.addAttribute("recipse", new ArrayList<RecipeDto>());
         model.addAttribute("search", "");
         model.addAttribute("fresh", true);
 
-
-        return "search/SearchPage";
-    }
-
-    enum RecipeSort {
-        time,
-        rating
+        return "search";
     }
 
     @GetMapping(value = "/search")
@@ -64,12 +57,12 @@ public class RecipeWebController {
             PageRequest.of(page.orElse(0), 2),
             search
         );
-        model.addAttribute("recipes", recipes.map(RecipeDto::forRecipe));
+        model.addAttribute("recipse", recipes.map(RecipeDto::forRecipe));
         model.addAttribute("search", search);
         model.addAttribute("hasMore", recipes.hasNext());
         model.addAttribute("nextPage", recipes.getNumber() + 1);
 
-        return "search/SearchPage";
+        return "search";
     }
 
 
@@ -94,19 +87,13 @@ public class RecipeWebController {
             search
         );
         log.info("Search for '{}'", search);
-        model.addAttribute("recipes", recipes.map(RecipeDto::forRecipe));
+        model.addAttribute("recipse", recipes.map(RecipeDto::forRecipe));
         model.addAttribute("search", search);
         model.addAttribute("fresh", false);
         model.addAttribute("hasMore", recipes.hasNext());
         model.addAttribute("nextPage", recipes.getNumber() + 1);
 
-        // todo #40:
-        //   - als erstes View: "search :: pagination":
-        //       return MultiViews.of("search/SearchPagination", "search/SearchResult");
-        return MultiViews.of(
-            "search/FindMoreButton",
-            "search/SearchResult"
-        );
+        return MultiViews.of("search :: pagination", "search :: searchResult");
     }
 
     @GetMapping(value = "/search/reset", headers = "HX-Request")
@@ -119,7 +106,7 @@ public class RecipeWebController {
         model.addAttribute("search", "");
         model.addAttribute("fresh", true);
 
-        return "search/SearchPageContent";
+        return "search :: main";
     }
 
     @GetMapping(value = "/search/{recipeId}/summary", headers = "HX-Request")
@@ -137,44 +124,33 @@ public class RecipeWebController {
         model.addAttribute("detailId", recipeDetails.id());
         model.addAttribute("includeDetails", include_details.orElse(false));
 
-        return "search/ExpandedRecipeSummary";
+        return "fragments/search-component :: ExpandedRecipeSummary";
     }
 
-    // ---------------------------------------------------------------------------------
-    //   EINZEL DARSTELLUNG REZEPT
-    //   ("inkrementelle" Darstellung für htmx)
-    // ---------------------------------------------------------------------------------
     @GetMapping(value = "/recipes/{recipeId}", headers = "HX-Request")
-    public String recipePage(@PathVariable Long recipeId, Model model, @RequestParam("slowdown") Optional<Long> slowdown) {
+    public String recipePage(@PathVariable Long recipeId, Model model) {
         log.info("HX Request for Recipe-Id '{}'", recipeId);
-
-        sleepFor("HX-Request recipe for recipe-id " + recipeId, slowdown);
 
         var recipe = recipeRepository.findById(recipeId)
             .orElseThrow(() -> new EntityNotFoundException("Receipe " + recipeId + " not found."));
 
+        model.addAttribute("recipeId", String.valueOf(recipeId));
         model.addAttribute("recipe", DetailedRecipeDto.of(recipe));
 
-        return "recipe/RecipePage";
+        return "recipe :: RecipePage";
 
     }
 
-    // ---------------------------------------------------------------------------------
-    //   EINZEL DARSTELLUNG REZEPT
-    //   (Vollständige Seite)
-    // ---------------------------------------------------------------------------------
     @GetMapping(value = "/recipes/{recipeId}")
     public String recipePage(@PathVariable Long recipeId,
                              @RequestParam("feedback_page") Optional<Integer> feedbackPage,
-                             @RequestParam Optional<Long> slowdown,
                              Model model) {
         log.info("Recipe Page for Recipe-Id '{}'", recipeId);
-
-        Utils.sleepFor("Getting Recipe-Id", slowdown);
 
         var recipe = recipeRepository.findById(recipeId)
             .orElseThrow(() -> new EntityNotFoundException("Receipe " + recipeId + " not found."));
 
+        model.addAttribute("recipeId", String.valueOf(recipeId));
         model.addAttribute("recipe", DetailedRecipeDto.of(recipe));
 
         feedbackPage.ifPresent(f -> {
@@ -183,10 +159,10 @@ public class RecipeWebController {
         });
 
 
-        return "recipe/RecipePage";
+        return "recipe";
     }
 
-    public record FeedbackResponseDto(
+    record FeedbackResponseDto(
         List<Feedback> feedback,
         boolean hasPrev,
         boolean hasNext,
@@ -224,7 +200,7 @@ public class RecipeWebController {
         model.addAttribute("recipeId", String.valueOf(recipeId));
         model.addAttribute("feedback", feedback);
 
-        return "recipe/feedback/FeedbackList";
+        return "fragments/recipe-feedback :: FeedbackList";
     }
 
     private FeedbackResponseDto getFeedbackForRecipe(Long recipeId, int feedbackPage) {
@@ -248,7 +224,7 @@ public class RecipeWebController {
         model.addAttribute("newsletterEmail", request.newsletterEmail);
         model.addAttribute("newsletterResult", "success");
 
-        return "layout/NewsletterRegistration";
+        return "fragments/newsletter-registration :: NewsletterRegistration";
     }
 
 }
