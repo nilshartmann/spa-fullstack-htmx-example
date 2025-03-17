@@ -25,15 +25,14 @@
         <input
                 id="newsletterEmailInput"
                 name="newsletterEmail"
-                type="input"
-                class="h-8 w-full max-w-full rounded border border-gray-400 bg-white p-2 text-gray-500 disabled:bg-gray-200"
+                type="text"
                 value="${newsletterEmail}"
                 placeholder="E-Mail"
+                hx-on:input="document.getElementById('newsletterSubscribed')?.remove()"
         />
     </div>
     <div>
         @template.components.Button(
-        checked="success".equals(newsletterResult),
         disabled=false,
         content = @`
             <div class="flex space-x-2">
@@ -41,14 +40,13 @@
                         id="subscribeButton"
                         type="submit"
                 >Subscribe
-
                 </button>
                 @template.components.LoadingIndicator(id = "newsletterLoading", secondary = true)
             </div>
         `)
     </div>
     @if("success".equals(newsletterResult))
-        <div>Subscribed!</div>
+        <div id="newsletterSubscribed">Subscribed!</div>
     @endif
 
 </form>

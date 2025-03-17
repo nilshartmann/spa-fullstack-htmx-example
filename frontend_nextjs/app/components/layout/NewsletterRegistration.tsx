@@ -23,6 +23,7 @@ export function NewsletterRegistration() {
   const handleSubmit = () => {
     startTransition(async () => {
       await subscribeToNewsletter(email);
+      setEmail("");
       setStatus("Subscribed!");
     });
   };
@@ -43,11 +44,13 @@ export function NewsletterRegistration() {
         />
       </div>
       <div>
-        <Button disabled={saveDisabled} checked={status === "Subscribed!"}>
+        <Button disabled={saveDisabled}>
           {isRequestRunning ? (
             <LoadingIndicator secondary placeholder={<img src={logo.src} />} />
           ) : (
-            <button onClick={handleSubmit}>Subscribe</button>
+            <button disabled={saveDisabled} onClick={handleSubmit}>
+              Subscribe
+            </button>
           )}
         </Button>
       </div>

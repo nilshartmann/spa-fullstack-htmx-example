@@ -5,7 +5,7 @@ type InputProps = IntrinsicElements["input"];
 
 export function Input({ className, ...rest }: InputProps) {
   const inputClassname = twMerge(
-    "h-8 w-full max-w-full rounded border border-gray-400 bg-white p-2 text-gray-500",
+    "h-8 w-full max-w-full rounded border border-gray-400 bg-white p-2 text-gray-500 disabled:bg-gray-200",
     className,
   );
 

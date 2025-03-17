@@ -2,6 +2,8 @@ import { Input } from "./Input.tsx";
 import { Button } from "./Button.tsx";
 import React, { useState } from "react";
 import { useSubscribeToNewsletterMutation } from "./use-queries.ts";
+import LoadingIndicator from "./LoadingIndicator.tsx";
+import logo from "./logo.png";
 
 export function NewsletterRegistration() {
   const [email, setEmail] = useState("");
@@ -34,8 +36,14 @@ export function NewsletterRegistration() {
         />
       </div>
       <div>
-        <Button disabled={saveDisabled} checked={mutation.isSuccess}>
-          <button onClick={handleSubmit}>Subscribe</button>
+        <Button disabled={saveDisabled}>
+          {mutation.isPending ? (
+            <LoadingIndicator secondary placeholder={<img src={logo} />} />
+          ) : (
+            <button onClick={handleSubmit} disabled={saveDisabled}>
+              Subscribe
+            </button>
+          )}
         </Button>
       </div>
       <div>{mutation.isSuccess && "Subscribed!"}</div>

@@ -5,7 +5,7 @@ const colors = require("tailwindcss/colors");
 module.exports = {
   content: [
     "./src/main/resources/templates/**/*.{html,js}",
-    "./src/jte/**/*.{jte}",
+    "./src/main/frontend_htmx/**/*.jte",
   ],
   // 'opacity-0' wird beim Live Coding hinzugefuegt.
   //  Damit man waehrenddessen nicht das Build-Tool starten muss,

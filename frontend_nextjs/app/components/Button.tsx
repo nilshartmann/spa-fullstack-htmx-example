@@ -25,7 +25,7 @@ export function Button({
           checked &&
           "bg-green hover:cursor-default hover:bg-green hover:no-underline",
         disabled &&
-          "cursor-default bg-orange_2-200 hover:cursor-default hover:bg-orange_2-200",
+          "cursor-default bg-orange_2-200 no-underline hover:cursor-default hover:bg-orange_2-200 hover:no-underline",
       )}
     >
       {children}
