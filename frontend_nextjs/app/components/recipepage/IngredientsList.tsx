@@ -1,5 +1,4 @@
 import { Ingredient } from "../api-types.ts";
-import { AddFeedbackForm } from "@/app/components/recipepage/FeedbackForm.tsx";
 
 type IngredientListProps = {
   ingredients: Ingredient[];
@@ -9,7 +8,6 @@ type IngredientListProps = {
 export default function IngredientList({
   ingredients,
   servings = 4,
-  recipeId,
 }: IngredientListProps) {
   return (
     <>

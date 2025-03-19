@@ -1,4 +1,7 @@
 import { twMerge } from "tailwind-merge";
+import { useServingsStore } from "../../-components/useServingsStore.ts";
+import PlusButton from "./PlusButton.tsx";
+import MinusButton from "./MinusButton.tsx";
 
 type ServingsWidgetProps = {
   style?: "compact" | "large";
@@ -7,6 +10,8 @@ type ServingsWidgetProps = {
 export default function ServingsChooser({
   style = "compact",
 }: ServingsWidgetProps) {
+  const servingsStore = useServingsStore();
+
   // servingsStore verwenden
   //  PlusButton
   //  MinusButton
@@ -24,7 +29,9 @@ export default function ServingsChooser({
       {style === "large" && (
         <span className={"text-gray-500 "}>Show ingredients for</span>
       )}
-
+      <MinusButton onClick={() => servingsStore.decreaseServings()} />
+      {servingsStore.servings} Servings
+      <PlusButton onClick={() => servingsStore.increaseServings()} />
       {/*
 
       todo:

@@ -1,5 +1,6 @@
 import { DetailedRecipeDto } from "../../../../components/api-types.ts";
 import ServingsChooser from "./ServingsChooser.tsx";
+import { useServingsStore } from "../../-components/useServingsStore.ts";
 
 type IngredientsProps = {
   recipe: DetailedRecipeDto;
@@ -9,7 +10,7 @@ export function Ingredients({ recipe }: IngredientsProps) {
   // todo:
   //   - servingsStore verwenden
   //   - Berechnung unten zeigen
-  const servings = 4;
+  const servings = useServingsStore().servings;
   return (
     <>
       <div className={"mb-8 mt-8 flex items-center justify-between"}>
