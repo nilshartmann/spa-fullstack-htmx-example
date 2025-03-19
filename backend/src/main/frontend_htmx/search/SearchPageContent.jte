@@ -19,6 +19,12 @@
               ^-- mit Loading-Indicator vergleichen, der in SPA werkelt
          -->
         <input
+                hx-get="/search"
+                hx-trigger="input[target.value.length > 2] changed delay:200ms"
+                hx-target="#searchResult"
+                hx-indicator="#searchIndicator"
+                hx-swap="outerHTML"
+
                 type="search"
                 name="search"
                 id="searchField"
@@ -36,6 +42,9 @@
         -->
         <button
                 class="ms-2 cursor-pointer text-gray-500 underline hover:text-gray-900"
+                hx-get="/search/reset"
+                hx-swap="outerHTML"
+                hx-target="main"
         >
             Clear
         </button>

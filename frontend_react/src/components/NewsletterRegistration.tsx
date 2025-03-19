@@ -1,6 +1,8 @@
 import { Input } from "./Input.tsx";
 import { Button } from "./Button.tsx";
 import React, { useState } from "react";
+import { useSubscribeToNewsletterMutation } from "./use-queries.ts";
+import LoadingIndicator from "./LoadingIndicator.tsx";
 
 export function NewsletterRegistration() {
   const [email, setEmail] = useState("");
@@ -13,11 +15,16 @@ export function NewsletterRegistration() {
   //       <LoadingIndicator secondary placeholder={<img src={logo} />} />
   //   - nach erfolgreichem Speichenr "Subscribed!" zurücksetzen, wenn Taste gedrückt wird
 
+  // REST Aufruf!
+  const mutation = useSubscribeToNewsletterMutation();
+
   const handleEmailChange = (e: string) => {
     setEmail(e);
+    mutation.reset();
   };
 
   const handleSubmit = async () => {
+    await mutation.mutateAsync(email);
     setEmail("");
   };
 
@@ -35,10 +42,14 @@ export function NewsletterRegistration() {
       </div>
       <div>
         <Button>
-          <button onClick={handleSubmit}>Subscribe</button>
+          {mutation.isPending ? (
+            <LoadingIndicator secondary />
+          ) : (
+            <button onClick={handleSubmit}>Subscribe</button>
+          )}
         </Button>
       </div>
-      <div>{/* todo: subscribed anzeigen */}</div>
+      <div>{mutation.isSuccess && <span>Subscribed!</span>}</div>
     </div>
   );
 }

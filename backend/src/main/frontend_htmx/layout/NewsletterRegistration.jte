@@ -15,6 +15,8 @@
 <%--         -->--%>
 <form
         class="max-w-1/4 flex items-center space-x-4 pe-2 ps-2 font-barlow"
+        hx-post="/newsletter"
+        hx-swap="outerHTML"
 >
     <label for="newsletterEmailInput">Don't miss new recipes. Subscribe to newsletter</label>
     <div class="max-w-64">
